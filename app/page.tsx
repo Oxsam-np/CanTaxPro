@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Calculator, FileText, HelpCircle } from "lucide-react"
+import '../styles/globals.css'
+import type { AppProps } from 'next/app'
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
+
 
 export default function Home() {
   return (
