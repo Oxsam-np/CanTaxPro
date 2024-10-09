@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { CheckCircle, ArrowRight, FileText, DollarSign, ShieldCheck } from 'lucide-react'
+import { CheckCircle, ArrowRight, FileText, DollarSign, ShieldCheck, Calculator } from 'lucide-react'
 
 export default function BrandPage() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -19,15 +19,70 @@ export default function BrandPage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const features = [
+    { title: "Easy to Use", icon: <FileText className="w-12 h-12 text-blue-500 mb-4" />, description: "Intuitive interface guides you through the tax filing process step by step." },
+    { title: "Maximize Refunds", icon: <DollarSign className="w-12 h-12 text-green-500 mb-4" />, description: "Our smart algorithms ensure you claim every deduction and credit you're entitled to." },
+    { title: "Secure & Compliant", icon: <ShieldCheck className="w-12 h-12 text-purple-500 mb-4" />, description: "Bank-level encryption and full compliance with CRA regulations for your peace of mind." }
+  ]
+
+  const pricingPlans = [
+    { 
+      title: "Student", 
+      regularPrice: "$50", 
+      discountedPrice: "$30", 
+      features: [
+        "T4A (Scholarship)",
+        "T2202 (Tuition)",
+        "Rent receipts",
+        "Easy-to-use interface",
+        "Affordable for students"
+      ],
+      description: "Perfect for students looking for a simple and affordable way to file their taxes."
+    },
+    { 
+      title: "Professional", 
+      regularPrice: "$100", 
+      discountedPrice: "$70", 
+      features: [
+        "T4 (Employment Income)",
+        "T2125 (Business Income)",
+        "RRSP contribution receipts",
+        "Time-saving features",
+        "Ideal for busy professionals"
+      ],
+      description: "Designed for full-time professionals and Uber drivers, saving you time and hassle."
+    },
+    { 
+      title: "Business Owner", 
+      price: "Custom", 
+      features: [
+        "T2 (Corporate Income)",
+        "T2125 (Business Income)",
+        "GST/HST filings",
+        "Personalized tax advice",
+        "Tailored business solutions"
+      ],
+      description: "Comprehensive solution for business owners with expert, personalized tax advice."
+    }
+  ]
+
+  const testimonials = [
+    { name: "Sarah L.", role: "Small Business Owner", quote: "CANTAX saved me hours of work and maximized my refund. Highly recommended!" },
+    { name: "Michael T.", role: "Freelance Designer", quote: "The interface is so intuitive, and the support team is always there when I need them." }
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold gradient-text">CanTax Pro</h1>
+          <h1 className="text-2xl font-bold text-blue-600 flex items-center">
+            <Calculator className="w-8 h-8 mr-2" />
+            CANTAX
+          </h1>
           <nav className="hidden md:flex space-x-4">
-            <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
-            <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition-colors">Pricing</a>
-            <a href="#testimonials" className="text-gray-600 hover:text-blue-600 transition-colors">Testimonials</a>
+            {['features', 'pricing', 'testimonials'].map((item) => (
+              <a key={item} href={`#${item}`} className="text-gray-600 hover:text-blue-600 transition-colors capitalize">{item}</a>
+            ))}
           </nav>
           <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105">
             File Now
@@ -43,7 +98,7 @@ export default function BrandPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Simplify Your Canadian Taxes
+            Your Trusted Partner for Simple and Affordable Tax Filing
           </motion.h2>
           <motion.p 
             className="text-xl text-gray-600 mb-8"
@@ -51,7 +106,7 @@ export default function BrandPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Fast, accurate, and secure tax filing for individuals and businesses
+            Fast, accurate, and secure tax filing for Canadians
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -65,13 +120,9 @@ export default function BrandPage() {
         </section>
 
         <motion.section style={{ opacity }} className="features container mx-auto px-4 py-20" id="features">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">Why Choose CanTax Pro?</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">Why Choose CANTAX?</h3>
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: "Easy to Use", icon: <FileText className="w-12 h-12 text-blue-500 mb-4" />, description: "Intuitive interface guides you through the tax filing process step by step." },
-              { title: "Maximize Refunds", icon: <DollarSign className="w-12 h-12 text-green-500 mb-4" />, description: "Our smart algorithms ensure you claim every deduction and credit you're entitled to." },
-              { title: "Secure & Compliant", icon: <ShieldCheck className="w-12 h-12 text-purple-500 mb-4" />, description: "Bank-level encryption and full compliance with CRA regulations for your peace of mind." }
-            ].map((feature, index) => (
+            {features.map((feature, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 float-animation">
                 <CardHeader>
                   <div className="flex justify-center">{feature.icon}</div>
@@ -89,18 +140,22 @@ export default function BrandPage() {
           <div className="container mx-auto px-4">
             <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">Affordable Pricing Plans</h3>
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { title: "Basic", price: "$19.99", features: ["Personal tax return", "Basic deductions", "Email support"] },
-                { title: "Pro", price: "$39.99", features: ["Personal & small business", "Advanced deductions", "Priority support", "Audit assistance"] },
-                { title: "Enterprise", price: "Custom", features: ["Multiple business entities", "Dedicated account manager", "Custom integrations", "24/7 support"] }
-              ].map((plan, index) => (
+              {pricingPlans.map((plan, index) => (
                 <Card key={index} className={`text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 ${index === 1 ? 'border-blue-500 border-2' : ''}`}>
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">{plan.title}</CardTitle>
-                    <CardDescription className="text-4xl font-bold text-blue-600 my-4">{plan.price}</CardDescription>
+                    {plan.regularPrice && plan.discountedPrice ? (
+                      <div>
+                        <CardDescription className="text-2xl font-bold text-gray-400 line-through">{plan.regularPrice}</CardDescription>
+                        <CardDescription className="text-4xl font-bold text-blue-600 my-2">{plan.discountedPrice}</CardDescription>
+                      </div>
+                    ) : (
+                      <CardDescription className="text-4xl font-bold text-blue-600 my-4">{plan.price}</CardDescription>
+                    )}
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2">
+                    <p className="mb-4 text-gray-600">{plan.description}</p>
+                    <ul className="space-y-2 mb-6">
                       {plan.features.map((feature, fIndex) => (
                         <li key={fIndex} className="flex items-center justify-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
@@ -108,8 +163,8 @@ export default function BrandPage() {
                         </li>
                       ))}
                     </ul>
-                    <Button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white">
-                      Choose Plan
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                      {plan.title === "Business Owner" ? "Contact Us" : "Choose Plan"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -121,10 +176,7 @@ export default function BrandPage() {
         <section className="testimonials container mx-auto px-4 py-20" id="testimonials">
           <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">What Our Customers Say</h3>
           <div className="grid md:grid-cols-2 gap-8">
-            {[
-              { name: "Sarah L.", role: "Small Business Owner", quote: "CanTax Pro saved me hours of work and maximized my refund. Highly recommended!" },
-              { name: "Michael T.", role: "Freelance Designer", quote: "The interface is so intuitive, and the support team is always there when I need them." }
-            ].map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
                 <CardHeader>
                   <CardTitle>{testimonial.name}</CardTitle>
@@ -153,25 +205,30 @@ export default function BrandPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-xl font-bold mb-4 gradient-text">CanTax Pro</h4>
+              <h4 className="text-xl font-bold mb-4 gradient-text flex items-center">
+                <Calculator className="w-6 h-6 mr-2" />
+                CANTAX
+              </h4>
               <p>Simplifying Canadian taxes for individuals and businesses.</p>
             </div>
             <div>
               <h4 className="text-xl font-bold mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                <li><a href="#features" className="hover:text-blue-400 transition-colors">Features</a></li>
-                <li><a href="#pricing" className="hover:text-blue-400 transition-colors">Pricing</a></li>
-                <li><a href="#testimonials" className="hover:text-blue-400 transition-colors">Testimonials</a></li>
+                {['features', 'pricing', 'testimonials'].map((item) => (
+                  <li key={item}>
+                    <a href={`#${item}`} className="hover:text-blue-400 transition-colors capitalize">{item}</a>
+                  </li>
+                ))}
               </ul>
             </div>
             <div>
               <h4 className="text-xl font-bold mb-4">Contact Us</h4>
-              <p>Email: support@cantaxpro.com</p>
+              <p>Email: support@cantax.com</p>
               <p>Phone: 1-800-TAX-HELP</p>
             </div>
           </div>
           <div className="mt-8 text-center">
-            <p>&copy; 2024 CanTax Pro. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} CANTAX. All rights reserved.</p>
           </div>
         </div>
       </footer>
