@@ -2,12 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "../components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import { CheckCircle, ArrowRight, FileText, DollarSign, ShieldCheck } from 'lucide-react'
-import { useRouter } from 'next/router'
-import '../styles/brand-page.css'
-import '../styles/globals.css'
 
 export default function BrandPage() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,7 +23,7 @@ export default function BrandPage() {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">CanTax Pro</h1>
+          <h1 className="text-2xl font-bold gradient-text">CanTax Pro</h1>
           <nav className="hidden md:flex space-x-4">
             <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
             <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition-colors">Pricing</a>
@@ -39,9 +36,9 @@ export default function BrandPage() {
       </header>
 
       <main className="pt-20">
-        <section className="hero container mx-auto px-4 py-20 text-center">
+        <section className="hero container mx-auto px-4 py-20 text-center hero-pattern">
           <motion.h2 
-            className="text-5xl font-bold mb-4 text-gray-800"
+            className="text-5xl font-bold mb-4 text-gray-800 gradient-text"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -68,14 +65,14 @@ export default function BrandPage() {
         </section>
 
         <motion.section style={{ opacity }} className="features container mx-auto px-4 py-20" id="features">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose CanTax Pro?</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">Why Choose CanTax Pro?</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { title: "Easy to Use", icon: <FileText className="w-12 h-12 text-blue-500 mb-4" />, description: "Intuitive interface guides you through the tax filing process step by step." },
               { title: "Maximize Refunds", icon: <DollarSign className="w-12 h-12 text-green-500 mb-4" />, description: "Our smart algorithms ensure you claim every deduction and credit you're entitled to." },
               { title: "Secure & Compliant", icon: <ShieldCheck className="w-12 h-12 text-purple-500 mb-4" />, description: "Bank-level encryption and full compliance with CRA regulations for your peace of mind." }
             ].map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300 float-animation">
                 <CardHeader>
                   <div className="flex justify-center">{feature.icon}</div>
                   <CardTitle>{feature.title}</CardTitle>
@@ -90,7 +87,7 @@ export default function BrandPage() {
 
         <section className="pricing bg-gray-50 py-20" id="pricing">
           <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Affordable Pricing Plans</h3>
+            <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">Affordable Pricing Plans</h3>
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { title: "Basic", price: "$19.99", features: ["Personal tax return", "Basic deductions", "Email support"] },
@@ -122,7 +119,7 @@ export default function BrandPage() {
         </section>
 
         <section className="testimonials container mx-auto px-4 py-20" id="testimonials">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">What Our Customers Say</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 gradient-text">What Our Customers Say</h3>
           <div className="grid md:grid-cols-2 gap-8">
             {[
               { name: "Sarah L.", role: "Small Business Owner", quote: "CanTax Pro saved me hours of work and maximized my refund. Highly recommended!" },
@@ -156,7 +153,7 @@ export default function BrandPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-xl font-bold mb-4">CanTax Pro</h4>
+              <h4 className="text-xl font-bold mb-4 gradient-text">CanTax Pro</h4>
               <p>Simplifying Canadian taxes for individuals and businesses.</p>
             </div>
             <div>

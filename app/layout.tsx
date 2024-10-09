@@ -1,12 +1,11 @@
 import '../styles/globals.css'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
+export const metadata: Metadata = {
   title: 'CanTax Pro',
-  description: 'Expert tax solutions for Canadian individuals and corporations',
+  description: 'Simplify your Canadian taxes',
 }
+
 export default function RootLayout({
   children,
 }: {
@@ -14,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }
